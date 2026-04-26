@@ -1,6 +1,5 @@
-{ lib, ... }:
-with lib;
-{
+{lib, ...}:
+with lib; {
   imports = [
     ../defaults.nix
     ../../modules/disko/uefi-gpt-ext4-luks.nix
@@ -10,7 +9,7 @@ with lib;
   boot.loader.systemd-boot.enable = mkDefault true;
   boot.loader.efi.canTouchEfiVariables = mkDefault true;
 
-  mySystem.network.networkd.enable = true;
+  mySystem.networkd.enable = true;
 
   system.stateVersion = "25.11"; # only update when reinstalling with a newer ISO
 }

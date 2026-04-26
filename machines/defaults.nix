@@ -1,13 +1,14 @@
-{ config, lib, pkgs, machine, user, ... }:
-
-with lib;
-
 {
+  config,
+  lib,
+  pkgs,
+  machine,
+  ...
+}:
+with lib; {
   imports = [
-    # On each machine config file enable one of these or leave them disable
-    # for automatic DHCP configuration by facter.
-    ../modules/mySystem/network/networkd.nix
-    ../modules/mySystem/network/networkmanager.nix
+    ../modules/mySystem/networkd.nix
+    ../modules/mySystem/networkmanager.nix
   ];
 
   boot = {
@@ -20,37 +21,37 @@ with lib;
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # age # Modern encryption tool with small explicit keys
-    # caligula # User-friendly, lightweight TUI for disk imaging
-    # dnsutils # Domain name server - provides the `dig` command
-    # iperf # Tool to measure IP bandwidth using UDP or TCP
-    # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
-    # pciutils # Provides the `lspci` command
-    bat # Cat clone with syntax highlighting and Git integration
-    btop # Monitor of resources
-    fd # Simple, fast and user-friendly alternative to find
-    fzf # Command-line fuzzy finder written in Go
-    gh # GitHub CLI tool
-    git # Distributed version control system
-    just # Handy way to save and run project-specific commands
-    ncdu # Disk usage analyzer with an ncurses interface
-    neovim # Vim text editor fork focused on extensibility and agility
-    nix-tree # Interactively browse a Nix store paths dependencies
-    ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep
-    tldr # Simplified and community-driven man pages
-    wget # Tool for retrieving files using HTTP, HTTPS, and FTP
-    yazi # Blazing fast terminal file manager written in Rust, based on async I/O
-  ]
-  ++ optionals config.hardware.bluetooth.enable [
-    # NOTE: If you cannot connect Sony's Headphones is because the pipewire
-    # user services has not initiated. The user session must be initiated for
-    # the pipewire's user units to be triggered.
-    bluetui # TUI for managing bluetooth on Linux
-  ]
-  ++ optionals config.services.pipewire.enable [
-    wiremix # Simple TUI mixer for PipeWire
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      # age # Modern encryption tool with small explicit keys
+      # caligula # User-friendly, lightweight TUI for disk imaging
+      # dnsutils # Domain name server - provides the `dig` command
+      # iperf # Tool to measure IP bandwidth using UDP or TCP
+      # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
+      # pciutils # Provides the `lspci` command
+      bat # Cat clone with syntax highlighting and Git integration
+      btop # Monitor of resources
+      fd # Simple, fast and user-friendly alternative to find
+      gh # GitHub CLI tool
+      git # Distributed version control system
+      just # Handy way to save and run project-specific commands
+      ncdu # Disk usage analyzer with an ncurses interface
+      neovim # Vim text editor fork focused on extensibility and agility
+      nix-tree # Interactively browse a Nix store paths dependencies
+      ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep
+      tldr # Simplified and community-driven man pages
+      wget # Tool for retrieving files using HTTP, HTTPS, and FTP
+      yazi # Blazing fast terminal file manager written in Rust, based on async I/O
+    ]
+    ++ optionals config.hardware.bluetooth.enable [
+      # NOTE: If you cannot connect Sony's Headphones is because the pipewire
+      # user services has not initiated. The user session must be initiated for
+      # the pipewire's user units to be triggered.
+      bluetui # TUI for managing bluetooth on Linux
+    ]
+    ++ optionals config.services.pipewire.enable [
+      wiremix # Simple TUI mixer for PipeWire
+    ];
 
   hardware.bluetooth.enable = mkDefault true;
 
@@ -67,7 +68,7 @@ with lib;
   nix = {
     package = mkDefault pkgs.nixVersions.latest; # 2
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = mkDefault true; # 3
     };
     gc = {
@@ -115,9 +116,6 @@ with lib;
   # No imperative changes of user accounts.
   users.mutableUsers = mkDefault false;
 
-  users.users.${user}.extraGroups = [ ]
-    ++ optionals config.virtualisation.docker.enable [ "docker" ];
-
   virtualisation.docker.enable = mkDefault false;
 
   zramSwap = {
@@ -127,7 +125,6 @@ with lib;
     priority = 100; # Use zram before swap file
   };
 }
-
 # [1] https://github.com/mitchellh/nixos-config/blob/0c42252d8951ac338fe9d80d45ea912e0b956993/machines/vm-shared.nix#L11
 #     https://nixos.org/manual/nixos/unstable/#sec-kernel-config
 #
@@ -139,3 +136,4 @@ with lib;
 #     Refer to the following link for more details: https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
 #
 # About mkDefault, mkForce and mkOverride - https://nixos-and-flakes.thiscute.world/nixos-with-flakes/modularize-the-configuration#lib-mkoverride-lib-mkdefault-and-lib-mkforce
+

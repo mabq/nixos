@@ -1,6 +1,5 @@
 {lib, ...}:
-with lib;
-{
+with lib; {
   disko.devices = {
     disk = {
       main = {
@@ -16,7 +15,7 @@ with lib;
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ]; # Tightens permissions so only root can read the contents.
+                mountOptions = ["umask=0077"]; # Tightens permissions so only root can read the contents.
               };
             };
             luks = {

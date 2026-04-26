@@ -1,24 +1,24 @@
-{ config, lib, pkgs, user, ... }:
-
-with lib;
-
 {
-  options.mySystem.network.networkd.enable = mkEnableOption "Use systemd-networkd as the network manager";
+  config,
+  lib,
+  pkgs,
+  user,
+  ...
+}:
+with lib; {
+  options.mySystem.networkd.enable = mkEnableOption "Use systemd-networkd as the network manager";
 
-  config = mkIf config.mySystem.network.networkd.enable {
-    # -------------------------------------------------------------------------
-    # systemd-networkd
-    # -------------------------------------------------------------------------
+  config = mkIf config.mySystem.networkd.enable {
+    # --- systemd-networkd
 
-    # Disable conflicting services - these are enabled by default and conflict
-    # with systemd-networkd.
+    # Disable conflicting services - these are enabled by default and conflict with systemd-networkd.
     networking.useDHCP = false;
     networking.dhcpcd.enable = false;
 
-    # Do not create DHCP configurations based on facter file
+    # Do not create DHCP .network config files based on facter interfaces.
     hardware.facter.detected.dhcp.enable = mkDefault false;
 
-    # Enable and configure systemd-networkd
+    # Enable and configure systemd-networkd.
     systemd.network = {
       enable = true;
 
@@ -172,17 +172,16 @@ with lib;
     # Systemd-networkd configures IP/DNS after iwd has brought the link up. [1]
     networking.wireless.iwd.enable = true;
     # The user must be a member of the `wheel` group to manage iwd [2]
-    users.users.${user}.extraGroups = [ "wheel" ];
+    users.users.${user}.extraGroups = ["wheel"];
 
     # impala provides a TUI interface for iwd [3]
-    environment.systemPackages = [ pkgs.impala ];
+    environment.systemPackages = [pkgs.impala];
 
     # [1] https://wiki.archlinux.org/title/Iwd
     # [2] https://wiki.archlinux.org/title/Iwd#Usage
     # [3] https://wiki.archlinux.org/title/Iwd#Installation
   };
 }
-
 # ---
 #
 # Systemd-networkd is configured declaratively - perfect for Nixos management.
@@ -229,7 +228,6 @@ with lib;
 #
 # [1] https://tailscale.com/docs/reference/dns-in-tailscale?tab=macos#override-dns-servers
 # [2] https://tailscale.com/blog/sisyphean-dns-client-linux
-
 # ---
 #
 # systemd-networkd is ligher and faster than NetworkManager.
@@ -246,3 +244,4 @@ with lib;
 # then manually open the portal in your browser using the URL shown, or try
 # accessing `http://neverssl.com` or `http://captive.apple.com` to trigger the
 # redirect.
+

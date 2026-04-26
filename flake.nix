@@ -3,22 +3,27 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # 1
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs"; # 2
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-    # overlays = []; # 3
-    mkSystem = import ./lib/mksystem.nix { inherit nixpkgs home-manager inputs; };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    overlays = []; # 3
+    mkSystem = import ./lib/mksystem.nix {inherit overlays nixpkgs home-manager inputs;};
   in {
     nixosConfigurations = {
-      macbook = mkSystem { # 4
+      macbook = mkSystem {
         machine = "macbook"; # 5
         user = "mabq";
       };
@@ -29,7 +34,6 @@
     };
   };
 }
-
 # 1. Or use `nixos-XX.YY` for stable releases.
 #
 # 2. Override home-manager's nixpkgs version with our version. Not all flakes
@@ -46,3 +50,4 @@
 # special arguments. Use the same name as the NixOS configuration name - this
 # will be set as the default hostname and `nixos-rebuild` command uses the
 # hostname when no NixOS configuration name is passed.
+

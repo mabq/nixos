@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   disko.devices = {
     disk = {
       main = {
@@ -8,7 +7,7 @@
         content = {
           type = "gpt";
           partitions = {
-            # Required for GRUB on GPT + BIOS systems. Replaces the ESP from 
+            # Required for GRUB on GPT + BIOS systems. Replaces the ESP from
             # he UEFI version; no filesystem or mountpoint.
             BIOS = {
               size = "1M";
@@ -36,7 +35,7 @@
               content = {
                 type = "luks";
                 name = "crypted";
-                extraFormatArgs = [ "--type" "luks1" ]; # GRUB does not support LUKS2.
+                extraFormatArgs = ["--type" "luks1"]; # GRUB does not support LUKS2.
                 settings.allowDiscards = lib.mkDefault true; # Keep it if you need SSD performance/longevity. Remove it if you require maximum security and can accept performance degradation.
                 content = {
                   type = "filesystem";

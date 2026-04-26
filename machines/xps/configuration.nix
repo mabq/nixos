@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ../defaults.nix
     ../../modules/disko/bios-gpt-ext4.nix
