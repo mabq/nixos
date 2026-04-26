@@ -1,10 +1,14 @@
-{ pkgs, lib, ... }:
-with lib;
+{ pkgs, ... }:
 {
   # Add `~/.local/bin` to PATH
   environment.localBinInPath = true;
 
-  programs.zsh.enable = mkDefault true;
+  programs.zsh.enable = true;
+  environment.etc = {
+    "zshrc".text = "";
+    "zshenv".text = "";
+    "zprofile".text = "";
+  };
 
   users.users.mabq = {
     isNormalUser = true;
