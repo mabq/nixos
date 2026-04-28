@@ -13,6 +13,12 @@ HISTFILE="$HOME/.local/share/zsh/history"  # location of the history file
 HISTSIZE=10000 # how many lines to keep in memory
 SAVEHIST="${HISTSIZE}" # how many lines to save to history file
 
+# Setup command line history.
+# Don't export these, otherwise other shells (bash) will try to use same HISTFILE.
+SAVEHIST=2000
+HISTSIZE=2000
+HISTFILE=$HOME/.zsh_history
+
 # SSH-agent:
 #   Required for the ssh-agent to work across terminals
 # export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user

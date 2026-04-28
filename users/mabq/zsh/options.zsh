@@ -23,3 +23,4 @@
 # -- Zle (Zsh Line Editor)
 setopt no_beep # Don't beep on error
 
+setopt HIST_IGNORE_DUPS SHARE_HISTORY HIST_FCNTL_LOCK

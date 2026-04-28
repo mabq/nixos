@@ -20,3 +20,5 @@ eval "$(atuin init zsh --disable-up-arrow)"
 # zstyle ":completion:*" menu select
 # compinit
 # _comp_options+=(globdots)   # include hidden files
+
+autoload -U compinit && compinit

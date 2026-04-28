@@ -85,15 +85,6 @@ with lib; {
   #   priority = 5; # Lower priority than zram
   # }];
 
-  # /etc/zshenv - read for all shells
-  # /etc/zshrc - read for interactive shells (disabled by /etc/zshenv.local)
-  # /etc/zprofile - read for login shells (disabled by /etc/zshenv.local)
-  programs.zsh.enable = mkDefault true;
-  environment.etc."zshenv.local".text = ''
-    # Disable reading of `/etc/zshrc` and `/etc/zprofile`
-    setopt NO_GLOBAL_RCS
-  '';
-
   # Required by pipewire
   security.rtkit.enable = mkIf config.services.pipewire.enable true;
 

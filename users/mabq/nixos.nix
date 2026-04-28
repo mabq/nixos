@@ -8,6 +8,14 @@
 with lib; {
   # environment.localBinInPath = true; # add `~/.local/bin` to PATH
 
+  programs.zsh.enable = mkDefault true;
+
+  environment.etc."zshenv.local".text = ''
+    # This file is sourced by `/etc/zshenv` (read for all shells).
+    # This option disables reading `/etc/zshrc` (read for interactive shells) and `/etc/zprofile (read for login shells)`.
+    setopt NO_GLOBAL_RCS
+  '';
+
   users.users.${user} = {
     isNormalUser = true;
     home = "/home/${user}";

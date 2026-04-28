@@ -15,11 +15,16 @@
       starship
       tmux
       zoxide
+      zsh-autosuggestions # Fish shell autosuggestions for Zsh
+      # zsh-completions # Additional completion definitions for zsh
+      zsh-history-substring-search # Fish shell history-substring-search for Zsh
+      zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
     ];
-    # file = {
-    #   ".bash_profile".source = ./bash/.bash_profile;
-    #   ".bashrc".source = ./bash/.bashrc;
-    # };
+    file = {
+      ".zshenv".text = ''
+        ZDOTDIR="$HOME/.local/share/nixos-config/users/${user}/zsh"
+      '';
+    };
     # You can update home Manager without changing this value. See
     # the home Manager release notes for a list of state version
     # changes in each release.
