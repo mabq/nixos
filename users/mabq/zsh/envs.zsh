@@ -1,4 +1,4 @@
-# Environment variables.
+# Environment variables
 # Do not set the `TERM` variable!, it is set by each terminal emulator.
 export EDITOR="nvim" # TODO: move this later to uswm
 export SUDO_EDITOR="$EDITOR"
@@ -16,6 +16,6 @@ export BAT_THEME=ansi
 export NIXOS_CONFIG_PATH=$HOME/.local/share/nixos-config
 export PATH=$NIXOS_CONFIG_PATH/bin:$PATH:$HOME/.local/bin
 
-# SSH-agent:
-#   Required for the ssh-agent to work across terminals
+# SSH Agent
+# Required for the ssh-agent to work across terminals
 # export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"  # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user

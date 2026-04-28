@@ -21,4 +21,7 @@ eval "$(atuin init zsh --disable-up-arrow)"
 # compinit
 # _comp_options+=(globdots)   # include hidden files
 
-autoload -U compinit && compinit
+
+
+# ~/.local/state/home-manager/gcroots/current-home/home-path/share/
+

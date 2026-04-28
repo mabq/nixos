@@ -16,7 +16,6 @@
       tmux
       zoxide
       zsh-autosuggestions # Fish shell autosuggestions for Zsh
-      # zsh-completions # Additional completion definitions for zsh
       zsh-history-substring-search # Fish shell history-substring-search for Zsh
       zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
     ];
@@ -30,8 +29,6 @@
     # changes in each release.
     stateVersion = "25.11";
   };
-
-  # programs = {};
 
   xdg = {
     enable = true;
