@@ -5,5 +5,3 @@ result-*
 # Ignore automatically generated direnv output
 .direnv
 
-# zsh - ignore cache file put in the ZDOTDIR directory
-.zcompdump*

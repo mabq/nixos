@@ -1,8 +1,11 @@
-# Environment variables
-# Do not set the `TERM` variable!, it is set by each terminal emulator.
-export EDITOR="nvim" # TODO: move this later to uswm
-export SUDO_EDITOR="$EDITOR"
+export NIXOS_CONFIG_PATH=$HOME/.local/share/nixos-config # NOTE: Duplicated from .config/uwsm/env so SSH works too
+export NIXOS_CURRENT_SYSTEM=/run/current-system/sw
+export NIXOS_CURRENT_HOME=$HOME/.local/state/home-manager/gcroots/current-home/home-path # We use Home-manager as a NixOS module, this seems to be the only path to get the current home.
+
 export BAT_THEME=ansi
+export EDITOR="nvim" # TODO: move this later to uswm
+export PATH=$NIXOS_CONFIG_PATH/bin:$PATH:$HOME/.local/bin
+export SUDO_EDITOR="$EDITOR"
 # export BROWSER="brave"  # when opening links
 # export GPG_TTY="${TTY:-$(tty)}"
 # export GTK_THEME="Adwaita:dark"
@@ -11,10 +14,7 @@ export BAT_THEME=ansi
 # export PAGER="less -R --use-color -Dd+r -Du+b"
 # export VISUAL="nvim"  # when opening a GUI editor (nnn `-e` option will respect this variable)
 # export VOLTA_HOME="$XDG_CONFIG_HOME/.volta" # The hassle-free JavaScript Tools Manager
-
-# Duplicated from .config/uwsm/env so SSH works too
-export NIXOS_CONFIG_PATH=$HOME/.local/share/nixos-config
-export PATH=$NIXOS_CONFIG_PATH/bin:$PATH:$HOME/.local/bin
+# export TERM=  # Do not set this variable, it is set by each terminal emulator.
 
 # SSH Agent
 # Required for the ssh-agent to work across terminals

@@ -23,8 +23,8 @@ in
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.${user} = import userHMConfig;
         home-manager.extraSpecialArgs = specialArgs;
+        home-manager.users.${user} = userHMConfig;
       }
     ];
   }

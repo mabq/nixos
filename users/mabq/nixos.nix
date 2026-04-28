@@ -9,9 +9,6 @@ with lib; {
   # environment.localBinInPath = true; # add `~/.local/bin` to PATH
 
   programs.zsh.enable = mkDefault true;
-  programs.zsh.enableCompletion = mkDefault true;
-  programs.zsh.autosuggestions.enable = mkDefault true;
-  programs.zsh.syntaxHighlighting.enable = mkDefault true;
 
   environment.etc."zshenv.local".text = ''
     # This file is sourced by `/etc/zshenv` (read for all shells).
