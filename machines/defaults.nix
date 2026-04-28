@@ -86,6 +86,16 @@ with lib; {
   #   priority = 5; # Lower priority than zram
   # }];
 
+  programs = {
+    zsh = {
+      enable = mkDefault true;
+      histSize = 10000;
+      promptInit = "";
+      autosuggestions.enable = mkDefault true;
+      syntaxHighlighting.enable = mkDefault true;
+    };
+  };
+
   # Required by pipewire
   security.rtkit.enable = mkIf config.services.pipewire.enable true;
 
