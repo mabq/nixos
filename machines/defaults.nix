@@ -36,7 +36,6 @@ with lib; {
       git # Distributed version control system
       just # Handy way to save and run project-specific commands
       ncdu # Disk usage analyzer with an ncurses interface
-      neovim # Vim text editor fork focused on extensibility and agility
       nix-tree # Interactively browse a Nix store paths dependencies
       ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep
       tldr # Simplified and community-driven man pages
@@ -86,15 +85,14 @@ with lib; {
   #   priority = 5; # Lower priority than zram
   # }];
 
-  programs = {
-    zsh = {
-      enable = mkDefault true;
-      histSize = 10000;
-      promptInit = "";
-      autosuggestions.enable = mkDefault true;
-      syntaxHighlighting.enable = mkDefault true;
-    };
-  };
+  # /etc/zshenv - read for all shells
+  # /etc/zshrc - read for interactive shells (disabled by /etc/zshenv.local)
+  # /etc/zprofile - read for login shells (disabled by /etc/zshenv.local)
+  programs.zsh.enable = mkDefault true;
+  environment.etc."zshenv.local".text = ''
+    # Disable reading of `/etc/zshrc` and `/etc/zprofile`
+    setopt NO_GLOBAL_RCS
+  '';
 
   # Required by pipewire
   security.rtkit.enable = mkIf config.services.pipewire.enable true;

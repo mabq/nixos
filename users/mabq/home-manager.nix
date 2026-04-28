@@ -9,9 +9,9 @@
     homeDirectory = "/home/${user}";
     packages = with pkgs; [
       atuin
-      # bash-completion
       eza
       fzf
+      neovim
       starship
       tmux
       zoxide
