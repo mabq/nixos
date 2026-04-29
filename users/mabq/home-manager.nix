@@ -5,29 +5,44 @@
   ...
 }: {
   home = {
-    username = user;
-    homeDirectory = "/home/${user}";
-    packages = with pkgs; [
-      atuin
-      eza
-      fzf
-      neovim
-      starship
-      tmux
-      zoxide
-      zsh-autosuggestions # Fish shell autosuggestions for Zsh
-      zsh-history-substring-search # Fish shell history-substring-search for Zsh
-      zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
-    ];
     file = {
       ".zshenv".text = ''
         ZDOTDIR="$HOME/.local/share/nixos-config/users/${user}/zsh"
       '';
     };
+    homeDirectory = "/home/${user}";
+    packages = with pkgs; [
+      # age # Modern encryption tool with small explicit keys
+      # caligula # User-friendly, lightweight TUI for disk imaging
+      # dnsutils # Domain name server - provides the `dig` command
+      # iperf # Tool to measure IP bandwidth using UDP or TCP
+      # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
+      # pciutils # Provides the `lspci` command
+      atuin # Replacement for a shell history
+      bat # Cat clone with syntax highlighting and Git integration
+      btop # Monitor of resources
+      eza # Modern, maintained replacement for ls
+      fd # Simple, fast and user-friendly alternative to find
+      fzf # Command-line fuzzy finder
+      ncdu # Disk usage analyzer with an ncurses interface
+      neovim # Vim text editor fork
+      nix-tree # Interactively browse a Nix store paths dependencies
+      ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep
+      starship # Customizable prompt for any shell
+      tldr # Simplified and community-driven man pages
+      tmux # Terminal multiplexer
+      wget # Tool for retrieving files using HTTP, HTTPS, and FTP
+      yazi # Blazing fast terminal file manager written in Rust, based on async I/O
+      zoxide # Fast cd command that learns your habits
+      zsh-autosuggestions # Fish shell autosuggestions for Zsh
+      zsh-history-substring-search # Fish shell history-substring-search for Zsh
+      zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
+    ];
     # You can update home Manager without changing this value. See
     # the home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "25.11";
+    username = user;
   };
 
   xdg = {

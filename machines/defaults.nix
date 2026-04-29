@@ -23,24 +23,9 @@ with lib; {
 
   environment.systemPackages = with pkgs;
     [
-      # age # Modern encryption tool with small explicit keys
-      # caligula # User-friendly, lightweight TUI for disk imaging
-      # dnsutils # Domain name server - provides the `dig` command
-      # iperf # Tool to measure IP bandwidth using UDP or TCP
-      # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
-      # pciutils # Provides the `lspci` command
-      bat # Cat clone with syntax highlighting and Git integration
-      btop # Monitor of resources
-      fd # Simple, fast and user-friendly alternative to find
       gh # GitHub CLI tool
       git # Distributed version control system
       just # Handy way to save and run project-specific commands
-      ncdu # Disk usage analyzer with an ncurses interface
-      nix-tree # Interactively browse a Nix store paths dependencies
-      ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep
-      tldr # Simplified and community-driven man pages
-      wget # Tool for retrieving files using HTTP, HTTPS, and FTP
-      yazi # Blazing fast terminal file manager written in Rust, based on async I/O
     ]
     ++ optionals config.hardware.bluetooth.enable [
       # NOTE: If you cannot connect Sony's Headphones is because the pipewire
