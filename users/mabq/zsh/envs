@@ -6,6 +6,8 @@ export BAT_THEME=ansi
 export EDITOR="nvim" # TODO: move this later to uswm
 export PATH=${NIXOS_CONFIG_PATH}/bin:${PATH}:${HOME}/.local/bin
 export SUDO_EDITOR=$EDITOR
+export STARSHIP_CONFIG=${NIXOS_CONFIG_PATH}/users/${USER}/starship/omarchy-remote.toml
+#
 # export GPG_TTY="${TTY:-$(tty)}"
 # export GTK_THEME="Adwaita:dark"
 # export MANPAGER="less -R --use-color -Dd+r -Du+b"

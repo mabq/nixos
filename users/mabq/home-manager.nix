@@ -9,6 +9,7 @@
       ".zshenv".text = ''
         ZDOTDIR="$HOME/.local/share/nixos-config/users/${user}/zsh"
       '';
+      # ".config/starship.toml".source = ./starship/starship.toml;
     };
     homeDirectory = "/home/${user}";
     packages = with pkgs; [
