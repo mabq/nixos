@@ -14,7 +14,6 @@
     homeDirectory = "/home/${user}";
     packages = with pkgs; [
       # age # Modern encryption tool with small explicit keys
-      # caligula # User-friendly, lightweight TUI for disk imaging
       # dnsutils # Domain name server - provides the `dig` command
       # iperf # Tool to measure IP bandwidth using UDP or TCP
       # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
@@ -22,9 +21,12 @@
       atuin # Replacement for a shell history
       bat # Cat clone with syntax highlighting and Git integration
       btop # Monitor of resources
+      caligula # User-friendly, lightweight TUI for disk imaging
       eza # Modern, maintained replacement for ls
       fd # Simple, fast and user-friendly alternative to find
+      ffmpeg # Complete, cross-platform solution to record, convert and stream audio and video
       fzf # Command-line fuzzy finder
+      imagemagick # Software suite to create, edit, compose, or convert bitmap images
       ncdu # Disk usage analyzer with an ncurses interface
       neovim # Vim text editor fork
       nix-tree # Interactively browse a Nix store paths dependencies

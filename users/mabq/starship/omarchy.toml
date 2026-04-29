@@ -1,4 +1,4 @@
-# Enable via $STARSHIP_CONFIG, see `zsh/envs` file.
+# Enable via $STARSHIP_CONFIG in `zsh/envs`.
 
 add_newline = true
 command_timeout = 200

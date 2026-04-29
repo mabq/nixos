@@ -1,1 +1,0 @@
-for f in $NIXOS_CONFIG_PATH/users/$USER/bash/fns/*; do source "$f"; done

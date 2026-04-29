@@ -1,5 +1,4 @@
 source "$ZDOTDIR/envs"
-source "$ZDOTDIR/shell"
 source "$ZDOTDIR/aliases"
 source "$ZDOTDIR/functions"
 source "$ZDOTDIR/init"
