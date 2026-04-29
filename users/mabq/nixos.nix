@@ -6,8 +6,6 @@
   ...
 }:
 with lib; {
-  # environment.localBinInPath = true; # add `~/.local/bin` to PATH
-
   programs.zsh.enable = mkDefault true;
 
   environment.etc."zshenv.local".text = ''

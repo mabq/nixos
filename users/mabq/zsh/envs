@@ -8,7 +8,7 @@ export EDITOR="nvim" # TODO: move this later to uswm
 
 # --- Config files ---
 
-export STARSHIP_CONFIG=${NIXOS_CONFIG_PATH}/users/${USER}/starship/pure-improved.toml
+export STARSHIP_CONFIG=${NIXOS_CONFIG_PATH}/users/${USER}/starship/starship.toml
 
 # --- Others ---
 

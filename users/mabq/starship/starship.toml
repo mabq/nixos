@@ -1,6 +1,4 @@
-# Enable via $STARSHIP_CONFIG in `zsh/envs`.
-
-"$schema" = 'https://starship.rs/config-schema.json'
+# Enabled via $STARSHIP_CONFIG env var in `zsh/envs`.
 
 format = """\
 $username\
