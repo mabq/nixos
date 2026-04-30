@@ -10,12 +10,12 @@ $character"""
 # $line_break\
 
 [username]
-style_root = "cyan"
-style_user = "cyan"
+style_root = "red"
+style_user = "yellow"
 format = '[\[$user]($style)'
 
 [hostname]
-style = "cyan"
+style = "yellow"
 format = '[@$hostname\]]($style) '
 
 [directory]

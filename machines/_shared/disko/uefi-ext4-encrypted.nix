@@ -4,7 +4,7 @@ with lib; {
     disk = {
       main = {
         type = "disk";
-        device = lib.mkDefault "/dev/sda"; # Allow to override on each machine config file
+        device = mkDefault "/dev/sda"; # Allow to override on each machine config file
         content = {
           type = "gpt";
           partitions = {

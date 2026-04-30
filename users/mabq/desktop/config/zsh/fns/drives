@@ -1,3 +1,5 @@
+# vim: filetype=sh
+
 # Format an entire drive for a single partition using exFAT
 format-drive() {
   if (($# != 2)); then

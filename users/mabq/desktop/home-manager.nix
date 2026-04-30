@@ -6,30 +6,31 @@
 }: {
   home = {
     file = {
-      ".zshenv".text = ''
-        ZDOTDIR="$HOME/.local/share/nixos-config/users/${user}/zsh"
-      '';
-      ".config/tmux/tmux.conf".source = ./tmux/tmux.conf;
+      ".zshenv".source = ./config/zsh/.zshenv;
+      # ".config/tmux/tmux.conf".source = ./config/tmux/tmux.conf;
     };
-    homeDirectory = "/home/${user}";
+    homeDirectory = "/home/${user}"; # TODO: check if needed
     packages = with pkgs; [
-      # age # Modern encryption tool with small explicit keys
       # dnsutils # Domain name server - provides the `dig` command
-      # iperf # Tool to measure IP bandwidth using UDP or TCP
       # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
-      # pciutils # Provides the `lspci` command
+      age # Modern encryption tool with small explicit keys
       atuin # Replacement for a shell history
       bat # Cat clone with syntax highlighting and Git integration
       btop # Monitor of resources
       caligula # User-friendly, lightweight TUI for disk imaging
+      exfat # Free exFAT file system implementation
       eza # Modern, maintained replacement for ls
       fd # Simple, fast and user-friendly alternative to find
       ffmpeg # Complete, cross-platform solution to record, convert and stream audio and video
       fzf # Command-line fuzzy finder
       imagemagick # Software suite to create, edit, compose, or convert bitmap images
+      iperf # Tool to measure IP bandwidth using UDP or TCP
       ncdu # Disk usage analyzer with an ncurses interface
       neovim # Vim text editor fork
       nix-tree # Interactively browse a Nix store paths dependencies
+      opencode # AI coding agent built for the terminal
+      parted # Create, destroy, resize, check, and copy partitions
+      pciutils # Provides the `lspci` command
       ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep
       starship # Customizable prompt for any shell
       tldr # Simplified and community-driven man pages
@@ -45,7 +46,7 @@
     # the home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "25.11";
-    username = user;
+    username = user; # TODO: check if needed
   };
 
   xdg = {

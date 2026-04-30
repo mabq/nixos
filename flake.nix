@@ -13,23 +13,21 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
+  outputs = {self, ...} @ inputs: let
+    repoPath = "$HOME/.local/share/nixos-config";
     overlays = []; # 3
-    mkSystem = import ./lib/mksystem.nix {inherit overlays nixpkgs home-manager inputs;};
+    mkSystem = import ./lib/mksystem.nix {inherit inputs repoPath overlays;};
   in {
     nixosConfigurations = {
       macbook = mkSystem {
         machine = "macbook"; # 5
         user = "mabq";
+        profile = "desktop";
       };
       xps = mkSystem {
         machine = "xps";
         user = "mabq";
+        profile = "plex";
       };
     };
   };

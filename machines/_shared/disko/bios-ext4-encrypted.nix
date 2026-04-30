@@ -1,9 +1,10 @@
-{lib, ...}: {
+{lib, ...}:
+with lib; {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = lib.mkDefault "/dev/sda"; # Override on each machine config file where different
+        device = mkDefault "/dev/sda"; # Override on each machine config file where different
         content = {
           type = "gpt";
           partitions = {
@@ -36,7 +37,7 @@
                 type = "luks";
                 name = "crypted";
                 extraFormatArgs = ["--type" "luks1"]; # GRUB does not support LUKS2.
-                settings.allowDiscards = lib.mkDefault true; # Keep it if you need SSD performance/longevity. Remove it if you require maximum security and can accept performance degradation.
+                settings.allowDiscards = mkDefault true; # Keep it if you need SSD performance/longevity. Remove it if you require maximum security and can accept performance degradation.
                 content = {
                   type = "filesystem";
                   format = "ext4";

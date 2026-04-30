@@ -1,19 +1,14 @@
-# --- Must go first, used by other below ---
+# vim: filetype=sh
 
-export NIXOS_CONFIG_PATH=${HOME}/.local/share/nixos-config # NOTE: Duplicated from .config/uwsm/env so SSH works too
-export NIXOS_CURRENT_SYSTEM=/run/current-system/sw
-export NIXOS_CURRENT_HOME=${HOME}/.local/state/home-manager/gcroots/current-home/home-path # We use Home-manager as a NixOS module, this seems to be the only path to get the current home.
+# Some packages (like zsh-autosuggestions) do not provide an executable, these variables help us reference current system and home links to nix store.
+export NIXOS_CURRENTSYSTEM="/run/current-system/sw"
+export NIXOS_CURRENTHOME="$HOME/.local/state/home-manager/gcroots/current-home/home-path"
 
-export EDITOR="nvim" # TODO: move this later to uswm
-
-# --- Config files ---
-
-export STARSHIP_CONFIG=${NIXOS_CONFIG_PATH}/users/${USER}/starship/starship.toml
-
-# --- Others ---
+export EDITOR="nvim" # TODO: check uswm later
 
 export BAT_THEME=ansi
-export PATH=${NIXOS_CONFIG_PATH}/bin:${PATH}:${HOME}/.local/bin
+export PATH="$NIXOS_USERPROFILEPATH/bin:$PATH:$HOME/.local/bin"
+export STARSHIP_CONFIG=${NIXOS_USERPROFILEPATH}/config/starship/starship.toml
 export SUDO_EDITOR=$EDITOR
 
 # export GPG_TTY="${TTY:-$(tty)}"

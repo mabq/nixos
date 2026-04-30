@@ -1,5 +1,0 @@
-source "$ZDOTDIR/envs"
-source "$ZDOTDIR/aliases"
-source "$ZDOTDIR/functions"
-source "$ZDOTDIR/init"
-[[ -o interactive ]] && source "$ZDOTDIR/inputrc"

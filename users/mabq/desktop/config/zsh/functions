@@ -1,0 +1,3 @@
+# vim: filetype=sh
+
+for f in ${NIXOS_USERPROFILEPATH}/config/zsh/fns/*; do source "$f"; done

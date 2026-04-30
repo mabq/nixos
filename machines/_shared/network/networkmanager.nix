@@ -1,3 +1,4 @@
+# Import this module if you want to use NetworkManager as the network manager.
 {
   config,
   lib,
@@ -5,19 +6,18 @@
   ...
 }:
 with lib; {
-  options.mySystem.networkmanager.enable = mkEnableOption "Use NetworkManager as the network manager";
+  # Do not create DHCP configurations based on facter file
+  hardware.facter.detected.dhcp.enable = mkDefault false;
 
-  config = mkIf config.mySystem.networkmanager.enable {
-    # Do not create DHCP configurations based on facter file
-    hardware.facter.detected.dhcp.enable = mkDefault false;
+  # Make sure systemd-networkd is not enable
+  systemd.network.enable = mkForce false;
 
-    networking.networkmanager = {
-      enable = true;
-    };
+  # --- NetworkManager ---
 
-    # Only members of the `networkmanager` group can use `nmtui` or `nmcli`
-    users.users.${user}.extraGroups = ["networkmanager"];
-  };
+  networking.networkmanager.enable = mkDefault true;
+
+  # Only members of the `networkmanager` group can use `nmtui` or `nmcli`
+  users.users.${user}.extraGroups = ["networkmanager"];
 }
 # ---
 #

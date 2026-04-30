@@ -1,8 +1,9 @@
-{lib, ...}: {
+{lib, ...}:
+with lib; {
   disko.devices = {
     disk = {
       main = {
-        device = lib.mkDefault "/dev/sda";
+        device = mkDefault "/dev/sda";
         type = "disk";
         content = {
           type = "gpt";
