@@ -14,9 +14,8 @@
   };
 
   outputs = {self, ...} @ inputs: let
-    repoPath = "$HOME/.local/share/nixos-config";
     overlays = []; # 3
-    mkSystem = import ./lib/mksystem.nix {inherit inputs repoPath overlays;};
+    mkSystem = import ./lib/mksystem.nix {inherit inputs overlays;};
   in {
     nixosConfigurations = {
       macbook = mkSystem {

@@ -8,7 +8,6 @@ export EDITOR="nvim" # TODO: check uswm later
 
 export BAT_THEME=ansi
 export PATH="$NIXOS_USERPROFILEPATH/bin:$PATH:$HOME/.local/bin"
-export STARSHIP_CONFIG=${NIXOS_USERPROFILEPATH}/config/starship/starship.toml
 export SUDO_EDITOR=$EDITOR
 
 # export GPG_TTY="${TTY:-$(tty)}"

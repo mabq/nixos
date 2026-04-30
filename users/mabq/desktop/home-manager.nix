@@ -2,12 +2,20 @@
   config,
   pkgs,
   user,
+  repoPath,
+  userProfilePath,
   ...
-}: {
+}: let
+  mkSym = config.lib.file.mkOutOfStoreSymlink;
+  configPath = "${userProfilePath}/config";
+in {
   home = {
     file = {
+      # export STARSHIP_CONFIG=${NIXOS_USERPROFILEPATH}/config/starship/starship.toml
       ".zshenv".source = ./config/zsh/.zshenv;
-      # ".config/tmux/tmux.conf".source = ./config/tmux/tmux.conf;
+      ".config/starship.toml".source = ./config/starship/starship.toml
+      ".config/tmux/tmux.conf".source = ./config/tmux/tmux.conf;
+      # ".config/tmux/tmux.conf".source = mkSym "${configPath}/tmux/tmux.conf";
     };
     homeDirectory = "/home/${user}"; # TODO: check if needed
     packages = with pkgs; [

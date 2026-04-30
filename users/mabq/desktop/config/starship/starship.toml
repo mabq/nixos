@@ -1,5 +1,3 @@
-# Enabled via $STARSHIP_CONFIG env var in `zsh/envs`.
-
 format = """\
 $username\
 $hostname\
