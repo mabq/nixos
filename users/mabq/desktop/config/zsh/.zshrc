@@ -1,6 +1,6 @@
 # vim: filetype=sh
 
-# This file is only read by interactive shells, after `/etc/zshenv` and `~/.zshenv`
+# This file is read after `/etc/zshenv` and `~/.zshenv` (only for interactive shells).
 
 source "$ZDOTDIR/envs"
 source "$ZDOTDIR/aliases"

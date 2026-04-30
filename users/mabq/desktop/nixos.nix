@@ -1,20 +1,10 @@
 {
   pkgs,
   user,
-  profile,
-  repoPath,
-  userProfilePath,
   ...
 }: {
   # Must enable zsh to be used as default shell.
   programs.zsh.enable = true;
-
-  environment.etc."zshenv.local".text = ''
-    # This file is automatically sourced by `/etc/zshenv`.
-    # The following variable is hard-coded into some config files.
-    export NIXOS_REPOPATH="${repoPath}"
-    export NIXOS_USERPROFILEPATH="${userProfilePath}"
-  '';
 
   users.users.${user} = {
     isNormalUser = true;

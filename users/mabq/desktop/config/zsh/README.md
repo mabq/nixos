@@ -2,9 +2,12 @@
 
 Zsh sources different files depending on the shell type.
 
-NixOS automatically configures `/etc/zshenv` to source a file called `/etc/zshenv.local`, we take advange of that to set some environment variables which content comes from the Flake configuration, and help us avoid hard-coding paths into out configuration files - without these variables our config files won't work!
+Invariably the first file to be sourced is `/etc/zshenv` regardless of the shell type. NixOS puts only necessary stuff in there, it sets some global variables and configures the `fpath` variable to show zsh where it can find all files for autocomplition in the Nix Store. We cannot avoid this file from being sourced but it does not matter since nothing there affects our config.
 
-We cannot stop zsh from sourcing `/etc/zshenv` (which is fine since it does not include anything we don't want), but we can instruct it not to source other global configuration files (like `/etc/zshrc` whose configurations we don't need and do conflict with ours) by setting the option `NO_GLOBAL_RCS` in out `~/.zshenv` file.
+Right after that `~/.zshenv` is sourced regardless of the shell type, so we must only include very specific stuff in there. Its content is produced by the user's `home-manager.nix` file. There we show zsh where to look for its config files via the `ZDOTDIR` variable, and also set the `NIXOS_USERPROFILEPATH` which can be used inside zsh config files to find the cloned repository files. More importantly we set the option `NO_GLOBAL_RCS` which instructs zsh not to load other global zsh config files, like `/etc/zshrc` which includes things we dont need (slowing down the init process) and has some weird keybinds that mess up out configs.
+
+`/etc/zshrc` will be ignored and our `~/.zshrc` file will source our config files.
+
 
 ## Shell Types
 --------------

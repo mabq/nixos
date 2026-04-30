@@ -1,21 +1,31 @@
 {
-  config,
+  config, # home-manager options, not NixOS options
   pkgs,
   user,
-  repoPath,
-  userProfilePath,
+  profile,
   ...
 }: let
-  mkSym = config.lib.file.mkOutOfStoreSymlink;
-  configPath = "${userProfilePath}/config";
+  theme = "catppuccin"; # must match one of the directory names in the themes folder
+  repoName = "nixos-config"; # 1
+  repoPath = "/home/${user}/.local/share/${repoName}"; # 2
+  profilePath = "${repoPath}/users/${user}/${profile}";
+  symlinkToConfig = path: config.lib.file.mkOutOfStoreSymlink "${profilePath}/config/${path}"; # 3
 in {
   home = {
     file = {
-      # export STARSHIP_CONFIG=${NIXOS_USERPROFILEPATH}/config/starship/starship.toml
-      ".zshenv".source = ./config/zsh/.zshenv;
-      ".config/starship.toml".source = ./config/starship/starship.toml
-      ".config/tmux/tmux.conf".source = ./config/tmux/tmux.conf;
-      # ".config/tmux/tmux.conf".source = mkSym "${configPath}/tmux/tmux.conf";
+      ".zshenv".text = ''
+        # Be careful what you put in this file, it affects every zsh invocation (including scp, rsync, etc).
+        setopt NO_GLOBAL_RCS # --- Ignore zsh global config files, except `/etc/zshenv` which is read before this file.
+        ZDOTDIR="${profilePath}/config/zsh" # --- Source zsh config files directly from the repository, no need to export.
+        export NIXOS_USERPROFILEPATH="${profilePath}" # --- Hard-coded into some config files to find the repository files.
+      '';
+      ".config/btop/btop.conf" = {
+        source = symlinkToConfig "btop.conf";
+        force = true;
+      };
+      ".config/starship.toml".source = symlinkToConfig "starship.toml";
+      ".config/tmux/tmux.conf".source = symlinkToConfig "tmux.conf";
+      ".config/${repoName}/current/theme".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/themes/${theme}";
     };
     homeDirectory = "/home/${user}"; # TODO: check if needed
     packages = with pkgs; [
@@ -50,11 +60,16 @@ in {
       zsh-history-substring-search # Fish shell history-substring-search for Zsh
       zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
     ];
-    # You can update home Manager without changing this value. See
-    # the home Manager release notes for a list of state version
+    username = user; # TODO: check if needed
+
+    # This value determines the Home Manager release that your
+    # configuration is compatible with. This helps avoid breakage
+    # when a new Home Manager release introduces backwards
+    # incompatible changes.
+    # You can update Home Manager without changing this value. See
+    # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "25.11";
-    username = user; # TODO: check if needed
   };
 
   xdg = {
@@ -98,3 +113,15 @@ in {
     };
   };
 }
+# 1. This name is used to refer to our configuration.
+#    Change it to match the name of the upstream repositoty.
+#
+# 2. Symlinks require absolute paths! Cannot contain `$HOME` or `~`.
+#    Change this if you ever decide to place the repository in another location.
+#
+# 3. This functions creates a symlink pointing to the given config file in the repository,
+#    instead of creating an inmutable copy of the file in the Nix Store and point to it.
+#    This way you can make edits to those files in the local machine and see those changes
+#    inmediately, without needing to rebuild NixOS or even fetch the repository.
+#    If you like the changes, commit and push. Otherwise just reset.
+
