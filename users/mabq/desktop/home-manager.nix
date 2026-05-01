@@ -6,10 +6,16 @@
   ...
 }: let
   theme = "catppuccin"; # must match one of the directory names in the themes folder
+
   repoName = "nixos-config"; # 1
   repoPath = "/home/${user}/.local/share/${repoName}"; # 2
+  themePath = "${repoPath}/themes/${theme}";
   profilePath = "${repoPath}/users/${user}/${profile}";
-  symlinkToConfig = path: config.lib.file.mkOutOfStoreSymlink "${profilePath}/config/${path}"; # 3
+  configPath = "${profilePath}/config/";
+
+  currentThemePath = "/home/${user}/.config/${repoName}/current/theme";
+
+  symlinkToConfig = path: config.lib.file.mkOutOfStoreSymlink "${configPath}/${path}"; # 3
 in {
   home = {
     file = {
@@ -17,12 +23,13 @@ in {
         # Be careful what you put in this file, it affects every zsh invocation (including scp, rsync, etc).
         setopt NO_GLOBAL_RCS # --- Ignore zsh global config files, except `/etc/zshenv` which is read before this file.
         ZDOTDIR="${profilePath}/config/zsh" # --- Source zsh config files directly from the repository, no need to export.
-        export NIXOS_USERPROFILEPATH="${profilePath}" # --- Hard-coded into some config files to find the repository files.
+        export NIXOS_USERPROFILEPATH="${profilePath}" # --- Hard-coded into some files.
       '';
       ".config/btop/btop.conf" = {
         source = symlinkToConfig "btop.conf";
         force = true;
       };
+      ".config/btop/themes/current.theme".source = "${currentThemePath}/btop.theme"; # the link never changes again
       ".config/starship.toml".source = symlinkToConfig "starship.toml";
       ".config/tmux/tmux.conf".source = symlinkToConfig "tmux.conf";
       ".config/${repoName}/current/theme".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/themes/${theme}";
