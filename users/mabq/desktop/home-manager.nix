@@ -32,7 +32,7 @@ in {
       ".config/btop/btop.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/btop.conf";
       ".config/starship.toml".source = mkOutOfStoreSymlink "${repoUserConfigPath}/starship.toml";
       ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/tmux.conf";
-      # To change themes you can just update the pointer of current theme.
+      # Theme - just change the pointer of current theme.
       ".config/${repoName}/current/theme".source = mkOutOfStoreSymlink "${repoPath}/themes/${theme}";
       ".config/btop/themes/current.theme".source = mkOutOfStoreSymlink "${localCurrentThemePath}/btop.theme";
     };
@@ -49,6 +49,7 @@ in {
       caligula # User-friendly, lightweight TUI for disk imaging
       exfat # Free exFAT file system implementation
       eza # Modern, maintained replacement for ls
+      fastfetch # Actively maintained, feature-rich and performance oriented, neofetch like system information tool
       fd # Simple, fast and user-friendly alternative to find
       ffmpeg # Complete, cross-platform solution to record, convert and stream audio and video
       fzf # Command-line fuzzy finder
