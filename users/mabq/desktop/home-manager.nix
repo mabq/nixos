@@ -9,32 +9,32 @@
 
   repoName = "nixos-config"; # 1
   repoPath = "/home/${user}/.local/share/${repoName}"; # 2
-  themePath = "${repoPath}/themes/${theme}";
-  profilePath = "${repoPath}/users/${user}/${profile}";
-  configPath = "${profilePath}/config/";
+  repoUserProfilePath = "${repoPath}/users/${user}/${profile}";
+  repoUserConfigPath = "${repoUserProfilePath}/config";
 
-  currentThemePath = "/home/${user}/.config/${repoName}/current/theme";
+  localCurrentThemePath = "/home/${user}/.config/${repoName}/current/theme";
 
-  symlinkToConfig = path: config.lib.file.mkOutOfStoreSymlink "${configPath}/${path}"; # 3
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in {
   home = {
     file = {
       ".zshenv".text = ''
         # Be careful what you put in this file, it affects every zsh invocation (including scp, rsync, etc).
         setopt NO_GLOBAL_RCS # --- Ignore zsh global config files, except `/etc/zshenv` which is read before this file.
-        ZDOTDIR="${profilePath}/config/zsh" # --- Source zsh config files directly from the repository, no need to export.
-        export NIXOS_USERPROFILEPATH="${profilePath}" # --- Hard-coded into some files.
+        ZDOTDIR="${repoUserConfigPath}/zsh" # --- Source zsh config files directly from the repository. No need to export.
+        export REPO_USER_PROFILE_PATH="${repoUserProfilePath}" # --- Hard-coded into some files.
       '';
-      ".config/btop/btop.conf" = {
-        source = symlinkToConfig "btop.conf";
-        force = true;
-      };
-      ".config/btop/themes/current.theme".source = "${currentThemePath}/btop.theme"; # the link never changes again
-      ".config/starship.toml".source = symlinkToConfig "starship.toml";
-      ".config/tmux/tmux.conf".source = symlinkToConfig "tmux.conf";
-      ".config/${repoName}/current/theme".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/themes/${theme}";
+      # Configurations in files created with mkOutOfStoreSymlink do not need a system rebuild
+      ".config/btop/btop.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/btop.conf";
+      ".config/starship.toml".source = mkOutOfStoreSymlink "${repoUserConfigPath}/starship.toml";
+      ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/tmux.conf";
+      # To change themes you can just update the pointer of current theme.
+      ".config/${repoName}/current/theme".source = mkOutOfStoreSymlink "${repoPath}/themes/${theme}";
+      ".config/btop/themes/current.theme".source = mkOutOfStoreSymlink "${localCurrentThemePath}/btop.theme";
     };
+
     homeDirectory = "/home/${user}"; # TODO: check if needed
+
     packages = with pkgs; [
       # dnsutils # Domain name server - provides the `dig` command
       # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
@@ -82,6 +82,7 @@ in {
   xdg = {
     enable = true;
     # Manage xdg directories, e.g.  ~/.config, ~/.local/share, etc.
+
     userDirs = {
       enable = true;
       setSessionVariables = true; # Create XDG variables automatically.
@@ -100,6 +101,7 @@ in {
     # `xdg-mime query filetype <file>`, then check the available `.desktop`
     # files in directories included in $XDG_DATA_DIRS. Finally, link a MIME
     # type to a .desktop file here.
+
     mimeApps = {
       enable = true;
       defaultApplications = {
@@ -108,6 +110,7 @@ in {
         "image/png" = "imv.desktop";
       };
     };
+
     desktopEntries = {
       # my-custom-app = {
       #   name = "My Custom App";

@@ -3,12 +3,8 @@
 export EDITOR="nvim" # TODO: check uswm later
 
 export BAT_THEME=ansi
-export PATH="$HOME/.local/bin:$NIXOS_USERPROFILEPATH/bin:$PATH"
+export PATH="$HOME/.local/bin:$REPO_USER_PROFILE_PATH/bin:$PATH"
 export SUDO_EDITOR=$EDITOR
-
-# Some packages (like zsh-autosuggestions) do not provide an executable, these variables help us reference current system and home links to nix store.
-# export NIXOS_CURRENTSYSTEM="/run/current-system/sw"
-# export NIXOS_CURRENTHOME="$HOME/.local/state/home-manager/gcroots/current-home/home-path"
 
 # export GPG_TTY="${TTY:-$(tty)}"
 # export GTK_THEME="Adwaita:dark"
