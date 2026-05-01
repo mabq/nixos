@@ -1,4 +1,5 @@
 {
+  lib,
   config, # home-manager options, not NixOS options
   pkgs,
   user,
@@ -15,9 +16,12 @@
   localCurrentThemePath = "/home/${user}/.config/${repoName}/current/theme";
 
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+
+  # Helper function to force-enable all files in an attribute set
+  forceFiles = fileSet: lib.mapAttrs (name: value: value // {force = true;}) fileSet;
 in {
   home = {
-    file = {
+    file = forceFiles {
       ".zshenv".text = ''
         # Be careful what you put in this file, it affects every zsh invocation (including scp, rsync, etc).
         setopt NO_GLOBAL_RCS # --- Ignore zsh global config files, except `/etc/zshenv` which is read before this file.
