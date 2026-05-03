@@ -4,6 +4,6 @@
   ...
 }:
 with lib; {
-  virtualisation.docker.enable = mkDefault false;
+  virtualisation.docker.enable = mkDefault true;
   users.users.${user}.extraGroups = ["docker"];
 }

@@ -29,8 +29,8 @@ in {
         export REPO_USER_PROFILE_PATH="${repoUserProfilePath}" # --- Hard-coded into some files.
       '';
       # Configurations in files created with mkOutOfStoreSymlink do not need a system rebuild
+      ".gitconfig".source = mkOutOfStoreSymlink "${repoUserConfigPath}/.gitconfig";
       ".config/btop/btop.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/btop.conf";
-      ".config/git/config".source = mkOutOfStoreSymlink "${repoUserConfigPath}/gitconfig";
       ".config/starship.toml".source = mkOutOfStoreSymlink "${repoUserConfigPath}/starship.toml";
       ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/tmux.conf";
       # Theme - just change the pointer of current theme.
@@ -44,7 +44,7 @@ in {
       age # Modern encryption tool with small explicit keys
       atuin # Replacement for a shell history
       bat # Cat clone with syntax highlighting and Git integration
-      bitwarden-cli # Secure and free password manager for all of your devices
+      bluetui # TUI for managing bluetooth on Linux [4]
       btop # Monitor of resources
       caligula # User-friendly, lightweight TUI for disk imaging
       exfat # Free exFAT file system implementation
@@ -71,16 +71,13 @@ in {
       zsh-autosuggestions # Fish shell autosuggestions for Zsh
       zsh-history-substring-search # Fish shell history-substring-search for Zsh
       zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
+      # bitwarden-cli # Secure and free password manager for all of your devices
       # dnsutils # Domain name server - provides the `dig` command
       # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
       # ------------------------------------------------------------------------
-      # aether
       # alacritty
       # alsa-utils
-      # asdcontrol
-      # avahi
-      # bash-completion
-      # bat
+      # avahi # mDNS/DNS-SD implementation (Bonjour)
       # bluetui
       # bolt
       # brightnessctl
@@ -286,4 +283,7 @@ in {
 #    This way you can make edits to those files in the local machine and see those changes
 #    inmediately, without needing to rebuild NixOS or even fetch the repository.
 #    If you like the changes, commit and push. Otherwise just reset.
+#
+# 4. In order for bluetui to work the pipewire user service must be active, try executing
+#    `wiremix` to start it.
 

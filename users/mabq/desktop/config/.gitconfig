@@ -1,5 +1,4 @@
 # See https://git-scm.com/docs/git-config
-
 [alias]
 	co = checkout
 	br = branch
