@@ -37,7 +37,7 @@ with lib; {
     just # Handy way to save and run project-specific commands
   ];
 
-  hardware.facter.reportPath = ../${machine}/facter.json;
+  hardware.facter.reportPath = ./${machine}/facter.json;
 
   i18n = {
     defaultLocale = mkDefault "en_US.UTF-8";
