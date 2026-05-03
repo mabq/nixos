@@ -30,6 +30,7 @@ in {
       '';
       # Configurations in files created with mkOutOfStoreSymlink do not need a system rebuild
       ".config/btop/btop.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/btop.conf";
+      ".config/git/config".source = mkOutOfStoreSymlink "${repoUserConfigPath}/gitconfig";
       ".config/starship.toml".source = mkOutOfStoreSymlink "${repoUserConfigPath}/starship.toml";
       ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "${repoUserConfigPath}/tmux.conf";
       # Theme - just change the pointer of current theme.
@@ -40,11 +41,10 @@ in {
     homeDirectory = "/home/${user}"; # TODO: check if needed
 
     packages = with pkgs; [
-      # dnsutils # Domain name server - provides the `dig` command
-      # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
       age # Modern encryption tool with small explicit keys
       atuin # Replacement for a shell history
       bat # Cat clone with syntax highlighting and Git integration
+      bitwarden-cli # Secure and free password manager for all of your devices
       btop # Monitor of resources
       caligula # User-friendly, lightweight TUI for disk imaging
       exfat # Free exFAT file system implementation
@@ -71,6 +71,153 @@ in {
       zsh-autosuggestions # Fish shell autosuggestions for Zsh
       zsh-history-substring-search # Fish shell history-substring-search for Zsh
       zsh-syntax-highlighting # Fish shell like syntax highlighting for Zsh
+      # dnsutils # Domain name server - provides the `dig` command
+      # ngrep # Network packet analyzer - use `sudo ngrep port <port>` to check if a port is being used
+      # ------------------------------------------------------------------------
+      # aether
+      # alacritty
+      # alsa-utils
+      # asdcontrol
+      # avahi
+      # bash-completion
+      # bat
+      # bluetui
+      # bolt
+      # brightnessctl
+      # btop
+      # chromium
+      # clang
+      # claude-code
+      # cups
+      # cups-browsed
+      # cups-filters
+      # cups-pdf
+      # docker
+      # docker-buildx
+      # docker-compose
+      # dosfstools
+      # dotnet-runtime-9.0
+      # dust
+      # evince
+      # exfatprogs
+      # expac
+      # eza
+      # fastfetch
+      # fcitx5
+      # fcitx5-gtk
+      # fcitx5-qt
+      # fd
+      # ffmpegthumbnailer
+      # fontconfig
+      # fzf
+      # github-cli
+      # gnome-calculator
+      # gnome-keyring
+      # gnome-themes-extra
+      # grim
+      # gpu-screen-recorder
+      # gum
+      # gvfs-mtp
+      # gvfs-nfs
+      # gvfs-smb
+      # hypridle
+      # hyprland
+      # hyprland-guiutils
+      # hyprland-preview-share-picker
+      # hyprlock
+      # hyprpicker
+      # hyprsunset
+      # imagemagick
+      # impala
+      # imv
+      # inetutils
+      # inxi
+      # iwd
+      # jq
+      # kdenlive
+      # kernel-modules-hook
+      # kvantum-qt5
+      # lazydocker
+      # lazygit
+      # less
+      # libsecret
+      # libyaml
+      # libqalculate
+      # libreoffice-fresh
+      # llvm
+      # localsend
+      # luarocks
+      # mako
+      # man-db
+      # mariadb-libs
+      # mise
+      # mpv
+      # nautilus
+      # nautilus-python
+      # gnome-disk-utility
+      # noto-fonts
+      # noto-fonts-cjk
+      # noto-fonts-emoji
+      # nss-mdns
+      # nvim
+      # obs-studio
+      # obsidian
+      # omarchy-nvim
+      # omarchy-walker
+      # pamixer
+      # pinta
+      # playerctl
+      # plocate
+      # plymouth
+      # polkit-gnome
+      # postgresql-libs
+      # power-profiles-daemon
+      # python-gobject
+      # python-poetry-core
+      # python-terminaltexteffects
+      # qt5-wayland
+      # ripgrep
+      # ruby
+      # rust
+      # satty
+      # sddm
+      # signal-desktop
+      # slurp
+      # spotify
+      # socat
+      # starship
+      # sushi
+      # swaybg
+      # swayosd
+      # system-config-printer
+      # tldr
+      # tree-sitter-cli
+      # tmux
+      # tobi-try
+      # ttf-ia-writer
+      # ttf-jetbrains-mono-nerd
+      # typora
+      # tzupdate
+      # ufw
+      # ufw-docker
+      # unzip
+      # usage
+      # uwsm
+      # waybar
+      # whois
+      # wireless-regdb
+      # wiremix
+      # wireplumber
+      # wl-clipboard
+      # woff2-font-awesome
+      # xdg-desktop-portal-gtk
+      # xdg-desktop-portal-hyprland
+      # xdg-terminal-exec
+      # xmlstarlet
+      # xournalpp
+      # yaru-icon-theme
+      # yay
+      # zoxide
     ];
     username = user; # TODO: check if needed
 
